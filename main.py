@@ -8,6 +8,9 @@ no clock, no local imports. Deterministic and byte-identical on every run.
 import os
 
 ENTRY = (
+    # Setup: the "fix" everyone dreads. Escalation: 47 tabs, then the
+    # unsaved draft, then the punchline — not the work that died, but
+    # the will to meet Friday's deadline.
     "IT 'fixed' my laptop by rebooting it \u2014 closing my 47 tabs, "
     "my unsaved draft, and apparently my will to meet Friday's deadline."
 )
@@ -17,6 +20,8 @@ def validate(line):
     """Gate-check the entry line before anything is written."""
     if not isinstance(line, str) or not line:
         raise ValueError("entry must be a non-empty string")
+    if not line.strip():
+        raise ValueError("entry must not be only whitespace")
     if not 1 <= len(line) <= 200:
         raise ValueError("entry must be 1-200 characters")
     if "\n" in line or "\r" in line:
